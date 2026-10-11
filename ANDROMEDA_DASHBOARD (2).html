@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#081324">
+<title>ANDROMEDA | Intelligent Industrial Asset Monitoring</title>
+<style>
+:root{color-scheme:dark;--bg:#080f1d;--surface:#111d2f;--surface2:#14243b;--border:#293952;--txt:#ecf5ff;--muted:#93a8bf;--cyan:#51d4ee;--green:#5be1b0;--amber:#f1c56b;--red:#ff829a}
+*{box-sizing:border-box}body{font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--txt);background:radial-gradient(ellipse 90% 45% at 88% -10%,#173e60 0%,transparent 67%),var(--bg);margin:0;min-height:100vh}
+.shell{max-width:1400px;margin:auto;padding:20px 28px 48px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:4px 0 24px;border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:13px}.mark{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;color:var(--cyan);font-weight:900;font-size:26px;border:1px solid #407695;background:linear-gradient(145deg,#20415b,#10263b)}.brand strong{display:block;letter-spacing:.15em;font-size:20px}.brand small{color:var(--muted);font-size:12px}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:#17263a;border-radius:100px;padding:8px 13px;font-size:12px;color:#bdcde1}.dot{height:8px;width:8px;border-radius:100%;background:var(--red)}.dot.ok{background:var(--green);box-shadow:0 0 12px #5be1b077}.topright{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;padding:28px 0 20px}.eyebrow{color:var(--cyan);text-transform:uppercase;letter-spacing:.17em;font-size:11px;font-weight:800}.hero h1{font-size:clamp(25px,4vw,40px);letter-spacing:-.045em;line-height:1.14;margin:9px 0}.hero p{color:var(--muted);max-width:650px;margin:0;font-size:14px;line-height:1.7}.meta{color:var(--muted);font-size:12px;margin-top:8px;text-align:right}
+.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.main{grid-template-columns:minmax(0,1.62fr) minmax(305px,1fr);margin-top:16px}.card{background:linear-gradient(160deg,rgba(25,40,61,.91),rgba(13,26,44,.96));border:1px solid var(--border);border-radius:17px;padding:19px;box-shadow:0 15px 35px #01061024;min-width:0}.cardhead{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:13px}.cardhead h2{font-size:16px;margin:0;font-weight:680;letter-spacing:-.01em}.label{font-size:12px;color:#aac0d6;margin:0 0 8px}.metric{font-size:clamp(24px,3vw,35px);font-weight:730;letter-spacing:-.04em;white-space:nowrap;line-height:1.2}.unit{font-size:14px;color:var(--muted);font-weight:500;letter-spacing:0;margin-left:5px}.foot{font-size:12px;color:var(--muted);margin-top:12px}.caption{color:var(--muted);font-size:12px;line-height:1.6}.node{font-size:11px;letter-spacing:.05em;padding:5px 9px;border-radius:7px;color:#9addf8;background:#19415d;border:1px solid #275a7b}.chip{font-size:11px;color:var(--green);background:#164337;border:1px solid #29674b;border-radius:7px;padding:4px 8px}.chip.warn{color:var(--amber);background:#48391c;border-color:#7c5b25}.chip.bad{color:var(--red);background:#4d2335;border-color:#7c3849}.chip.off{color:#a9bdd2;background:#24354a;border-color:#3b526a}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.detail{background:#0b1829;border:1px solid #29374d;border-radius:12px;padding:13px}.detail span{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}.detail strong{font-size:20px}.sections{display:grid;gap:16px}.small-title{font-weight:650;margin:0 0 12px;font-size:14px}.bigstatus{font-size:22px;font-weight:750;letter-spacing:-.02em}.actions{display:flex;gap:10px;margin-top:15px}button{appearance:none;font:inherit;border:0;cursor:pointer;border-radius:10px;font-weight:700;padding:11px 15px;transition:transform .15s,background .2s}button:not(:disabled):hover{transform:translateY(-1px)}button:disabled{cursor:not-allowed;opacity:.43}.btn-primary{background:var(--cyan);color:#081522}.btn-secondary{color:#e2f1fb;border:1px solid #405873;background:#22354e}.btn-on{background:var(--green);color:#08281c;flex:1}.btn-off{background:#9c3149;color:white;flex:1}
+.linkbox{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border);font-size:13px;gap:12px}.linkbox:first-of-type{border-top:0}.linkbox span{color:var(--muted)}.linkbox strong{font-size:12px}.status-line{display:flex;align-items:center;gap:6px}
+.row{display:flex;gap:11px;flex-wrap:wrap;align-items:center}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form-control{display:flex;flex-direction:column;gap:6px;min-width:0}.form-control label{color:var(--muted);font-size:11px;font-weight:650}.form-control input{width:100%;min-width:0;padding:11px 11px;background:#0b1728;border:1px solid #3a4b62;border-radius:9px;color:#ecf5ff;outline:none;font:inherit;font-size:13px}.form-control input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #51d4ee1b}.connection{display:flex;flex-direction:column;gap:12px}.connection .note{font-size:11px;line-height:1.5;color:var(--muted)}
+.chart{width:100%;height:205px;display:block}.chartlegend{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted)}.legend-item{display:flex;align-items:center;gap:6px}.swatch{display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--cyan)}.swatch.vib{background:#d2aaff}.ai{background:linear-gradient(135deg,#1e233d,#142339 65%,#123a49);border-color:#44466e}.aihead{display:flex;align-items:center;gap:10px}.aiicon{display:grid;place-items:center;width:36px;height:36px;background:#4d4269;border-radius:10px;font-size:19px}.ai h2{margin:0;font-size:16px}.ai p{line-height:1.65;color:#b7c7d7;font-size:12px}.airesult{background:#0e192b;border-radius:11px;border:1px solid #3a4965;margin:13px 0;padding:13px;min-height:63px;white-space:pre-wrap;line-height:1.5;font-size:13px}.events{max-height:215px;overflow:auto;font-family:ui-monospace,Consolas,monospace;color:#b5c8df;font-size:11px}.event{border-bottom:1px solid #27364a;padding:9px 0;word-break:break-word}.event em{color:#7992ab;font-style:normal;margin-right:9px}.fine{font-size:11px;color:#839ab2;line-height:1.6;margin-top:16px}.separator{height:1px;background:var(--border);margin:15px 0}.readonly{color:#9bc7e0}
+@media(max-width:950px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.main{grid-template-columns:1fr}.hero{align-items:start;flex-direction:column}.meta{text-align:left}}
+@media(max-width:540px){.shell{padding:15px 14px 30px}.brand strong{font-size:17px}.stats{gap:10px}.card{padding:14px}.form-row{grid-template-columns:1fr}.topright{gap:5px}.pill{font-size:10px}.hero{padding:23px 0 16px}.metric{font-size:26px}.two{gap:8px}.detail strong{font-size:18px}}
+</style>
+<script src="https://unpkg.com/mqtt@5.10.4/dist/mqtt.min.js"></script>
+</head>
+<body>
+<div class="shell">
+<header>
+  <div class="brand"><div class="mark">A</div><div><strong>ANDROMEDA</strong><small>Industrial Edge Asset Intelligence</small></div></div>
+  <div class="topright"><div class="pill"><span class="dot" id="cloudDot"></span><span id="cloudPill">MQTT Offline</span></div><div class="pill"><span class="dot" id="nodeDot"></span><span id="nodePill">Gateway Offline</span></div></div>
+</header>
+<section class="hero"><div><div class="eyebrow">Prototype / Live MQTT telemetry</div><h1>Machine health, in real time.</h1><p>Two-node monitoring system. ESP-NOW captures mechanical behavior locally; Node 2 publishes mechanical and electrical readings to EMQX Cloud.</p></div><div class="meta">Data mode: <span class="readonly">LIVE ONLY</span><div id="lastUpdated">Waiting for telemetry...</div></div></section>
+<section class="grid stats">
+  <article class="card"><div class="cardhead"><p class="label">DC SUPPLY VOLTAGE</p><span class="node">NODE 2</span></div><div class="metric"><span id="voltage">--</span><span class="unit">V</span></div><div class="foot">INA219 · VIN+ supply voltage</div></article>
+  <article class="card"><div class="cardhead"><p class="label">MOTOR CURRENT</p><span class="node">NODE 2</span></div><div class="metric"><span id="current">--</span><span class="unit">mA</span></div><div class="foot">INA219 · shunt measurement</div></article>
+  <article class="card"><div class="cardhead"><p class="label">DC POWER</p><span class="node">NODE 2</span></div><div class="metric"><span id="power">--</span><span class="unit">W</span></div><div class="foot">DC voltage × current</div></article>
+  <article class="card"><div class="cardhead"><p class="label">ENCODER SPEED</p><span class="node">NODE 1</span></div><div class="metric"><span id="rpm">--</span><span class="unit">RPM</span></div><div class="foot">Rotary encoder · PPR dependent</div></article>
+</section>
+<section class="grid main">
+  <div class="sections">
+    <article class="card"><div class="cardhead"><h2>Vibration & mechanical condition</h2><span class="chip off" id="vibStatus">NO DATA</span></div><div class="two"><div class="detail"><span>Vibration RMS</span><strong><span id="vibration">--</span> <span class="unit">g</span></strong></div><div class="detail"><span>Peak dynamic acceleration</span><strong><span id="peak">--</span> <span class="unit">g</span></strong></div><div class="detail"><span>Warning threshold</span><strong><span id="threshold">--</span> <span class="unit">g</span></strong></div><div class="detail"><span>Encoder revolutions</span><strong id="turns">--</strong></div></div><div class="separator"></div><div class="chartlegend"><span class="legend-item"><span class="swatch vib"></span>Vibration RMS (g)</span><span>Last 60 updates</span></div><canvas class="chart" id="vibChart" aria-label="Vibration trend" role="img"></canvas><p class="caption">RMS is an indicative accelerometer-based index, not a calibrated ISO vibration-velocity measurement.</p></article>
+    <article class="card"><div class="cardhead"><h2>Electrical trend</h2><span class="node">NODE 2</span></div><div class="chartlegend"><span class="legend-item"><span class="swatch"></span>Motor current (mA)</span><span>Last 60 updates</span></div><canvas class="chart" id="currentChart" aria-label="Motor current trend" role="img"></canvas></article>
+    <article class="card"><div class="cardhead"><h2>Recent events</h2><button class="btn-secondary" style="font-size:11px;padding:7px 10px" id="exportBtn">Export CSV</button></div><div id="events" class="events"><div class="event">Waiting for data. No demonstration values are fabricated.</div></div></article>
+  </div>
+  <div class="sections">
+    <article class="card"><div class="cardhead"><h2>Motor control</h2><span class="node">GPIO 23</span></div><p class="label">COMMAND STATUS</p><div class="bigstatus" id="relayText">UNKNOWN / OFFLINE</div><div class="actions"><button id="onBtn" class="btn-on" disabled>Motor ON</button><button id="offBtn" class="btn-off" disabled>Motor OFF</button></div><p class="caption">Commands are sent over MQTT to Node 2. Relay starts OFF after ESP32 reboot; this is not an independently verified motor-contact state. Only use a low-voltage, supervised DC bench prototype.</p></article>
+    <article class="card"><div class="cardhead"><h2>Network topology</h2><span class="chip" id="linkLabel">ESP-NOW</span></div><div class="linkbox"><span>Node 1 · MPU6050/Encoder</span><strong id="n1Link">OFFLINE</strong></div><div class="linkbox"><span>Node 2 · INA219/Relay</span><strong id="n2Link">OFFLINE</strong></div><div class="linkbox"><span>EMQX Cloud</span><strong id="mqttLink">DISCONNECTED</strong></div><div class="linkbox"><span>MQTT topic authorization</span><strong>nextdevice/#</strong></div><p class="caption">Node 1 → ESP-NOW → Node 2 → encrypted MQTT/TLS → Browser.</p></article>
+    <article class="card"><div class="cardhead"><h2>EMQX Cloud connection</h2><span class="chip warn" id="connectionLabel">AUTO CONNECT</span></div><div class="connection"><div class="form-control"><label for="mqttHost">Broker host</label><input id="mqttHost" autocomplete="off" value="na45ffa4.ala.asia-southeast1.emqxsl.com" spellcheck="false"></div><div class="form-row"><div class="form-control"><label for="mqttUser">MQTT username</label><input id="mqttUser" value="adddevice" autocomplete="username"></div><div class="form-control"><label for="mqttPassword">MQTT password</label><input type="password" id="mqttPassword" value="12345678" placeholder="Enter password" autocomplete="off"></div></div><div class="row"><button id="connectBtn" class="btn-primary">Connect MQTT</button><button id="disconnectBtn" class="btn-secondary" disabled>Disconnect</button></div><div class="note">Secure WebSocket: <b>wss://&lt;broker&gt;:8084/mqtt</b>. ESP32 uses <b>8883</b>, never 8884 on EMQX Serverless. MQTT CONNECTED here means only the browser is connected; it does not mean Node 2 is online. Demo mode: this page embeds the MQTT password in its HTML source for automatic login. Do not publish it publicly; use a restricted browser credential in production. The page uses the MQTT.js CDN, so internet access is required.</div></div></article>
+    <article class="card ai"><div class="aihead"><div class="aiicon">✦</div><div><h2>Gemini AI – Reserved</h2><span class="caption">Future anomaly insights / maintenance guidance</span></div></div><p>The dashboard will send the latest sensor data to your own authenticated server endpoint when you add one. It will never place a Gemini API key into public HTML.</p><div class="airesult" id="aiResult">Not configured. Set GEMINI_PROXY_ENDPOINT in the HTML JavaScript after you deploy a secure backend.</div><button class="btn-secondary" id="aiBtn" disabled>Analyze machine condition</button><p class="caption">No Gemini request is made until a proxy endpoint is configured. AI results must not be used as safety shutdown decisions.</p></article>
+  </div>
+</section>
+<div class="fine">ANDROMEDA educational prototype · Current and voltage are DC measurements. Power factor does not apply to the DC motor. ESP-NOW and MQTT message exchange are not substitutes for independently designed motor safety protection.</div>
+</div>
+<script>
+'use strict';
+// Future GEMINI integration: only insert a URL to your BACKEND PROXY here.
+// Put your Gemini API key into secure server-side environment variables.
+// Example: const GEMINI_PROXY_ENDPOINT = 'https://your-server.example.com/api/analyze';
+const GEMINI_PROXY_ENDPOINT = '';
+const TOPIC = {
+  n1:'nextdevice/node1/telemetry',
+  n2:'nextdevice/node2/telemetry',
+  relay:'nextdevice/node2/state/relay',
+  command:'nextdevice/node2/cmd/relay',
+  gateway:'nextdevice/node2/status'
+};
+const $=id=>document.getElementById(id);
+let client=null,connected=false, gatewayOnline=false;
+let latest1=null,latest2=null,lastN1=0,lastN2=0,lastRelay=null;
+let history1=[],history2=[],logRows=[];
+const fresh = t => (Date.now()-t)<5500;
+const num=(v,dp=2)=>typeof v==='number'&&Number.isFinite(v)?v.toFixed(dp):'--';
+const set=(id,text)=>{$(id).textContent=text};
+function setChip(id,text,kind){const e=$(id);e.textContent=text;e.className='chip '+(kind||'off')}
+function log(message){const stamp=new Date().toLocaleTimeString();logRows.unshift([new Date().toISOString(),message]);if(logRows.length>250)logRows.pop();
+  const div=document.createElement('div');div.className='event';const t=document.createElement('em');t.textContent=stamp;div.append(t,document.createTextNode(message));
+  const box=$('events');if(box.children.length===1&&box.firstElementChild?.textContent.startsWith('Waiting for data'))box.replaceChildren();box.prepend(div);while(box.children.length>30)box.lastElementChild.remove();}
+function badge(id,on,onText,offText){$(id).classList.toggle('ok',!!on);set(id==='cloudDot'?'cloudPill':'nodePill',on?onText:offText)}
+function markOffline(){connected=false;gatewayOnline=false;set('mqttLink','DISCONNECTED');setChip('connectionLabel','OFFLINE','off');set('relayText','UNKNOWN / OFFLINE');$('onBtn').disabled=true;$('offBtn').disabled=true;badge('cloudDot',false,'MQTT Online','MQTT Offline');badge('nodeDot',false,'Gateway Online','Gateway Offline');set('n2Link','OFFLINE');}
+function refreshUI(){const live1=connected&&gatewayOnline&&latest1&&latest1.online&&fresh(lastN1),live2=connected&&gatewayOnline&&latest2&&fresh(lastN2);
+  set('voltage',live2&&latest2.ina_ok?num(latest2.voltage,2):'--');set('current',live2&&latest2.ina_ok?num(latest2.current_ma,1):'--');set('power',live2&&latest2.ina_ok?num(latest2.power_w,3):'--');
+  set('rpm',live1&&latest1.mpu_ok?num(latest1.rpm,0):'--');set('vibration',live1&&latest1.mpu_ok?num(latest1.vibration_g,3):'--');set('peak',live1&&latest1.mpu_ok?num(latest1.peak_g,3):'--');set('threshold',live1&&latest1.mpu_ok?num(latest1.vibration_limit_g,2):'--');set('turns',live1&&latest1.mpu_ok?num(latest1.turns,2):'--');
+  set('n1Link',live1?'ONLINE': 'OFFLINE');set('n2Link',live2?'ONLINE':'OFFLINE');
+  const fault=live1&&latest1.mpu_ok&&latest1.alarm;setChip('vibStatus',!live1?'NO DATA':!latest1.mpu_ok?'SENSOR ERROR':fault?'WARNING':'NORMAL',!live1?'off':fault?'warn':'');
+  badge('nodeDot',connected&&gatewayOnline&&live2,'Gateway Online','Gateway Offline');
+  const enabled=!!live2;$('onBtn').disabled=!enabled;$('offBtn').disabled=!enabled;
+  set('relayText',enabled?(lastRelay===null?'AWAITING RELAY STATE':lastRelay?'ON – COMMANDED':'OFF – COMMANDED'):'UNKNOWN / OFFLINE');
+  if(live1||live2){const dt=new Date(Math.max(live1?lastN1:0,live2?lastN2:0));set('lastUpdated','Received '+dt.toLocaleTimeString());}
+}
+function chart(id,points,color){const c=$(id),r=c.getBoundingClientRect(),dpr=window.devicePixelRatio||1;c.width=Math.max(1,Math.round(r.width*dpr));c.height=Math.round(205*dpr);const ctx=c.getContext('2d');ctx.scale(dpr,dpr);const w=r.width,h=205,p=25;ctx.clearRect(0,0,w,h);ctx.strokeStyle='#2c3d54';ctx.lineWidth=1;for(let i=0;i<4;i++){const y=16+(h-35)*i/3;ctx.beginPath();ctx.moveTo(8,y);ctx.lineTo(w-6,y);ctx.stroke();}
+  const data=points.filter(x=>Number.isFinite(x));if(data.length<2){ctx.fillStyle='#7690aa';ctx.font='12px system-ui';ctx.fillText('Waiting for live telemetry...',15,h/2);return}
+  let min=Math.min(...data),max=Math.max(...data);if(max-min<0.01){max+=.02;min-=.02}const space=h-44;ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.beginPath();data.forEach((v,i)=>{const x=12+(w-25)*(i/(data.length-1)),y=16+space-(v-min)*space/(max-min);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.font='11px system-ui';ctx.fillStyle='#98afc9';ctx.fillText(max.toFixed(2),10,12);ctx.fillText(min.toFixed(2),10,h-7);}
+function draw(){chart('vibChart',history1,'#d2aaff');chart('currentChart',history2,'#51d4ee')}
+function onMessage(topic,buffer){const text=new TextDecoder().decode(buffer);try{
+  if(topic===TOPIC.gateway){gatewayOnline=text==='online';log('Gateway status: '+text);refreshUI();return;}
+  const data=JSON.parse(text);
+  if(topic===TOPIC.n1){latest1=data;lastN1=Date.now();if(data.online&&Number.isFinite(data.vibration_g)){history1.push(data.vibration_g);if(history1.length>60)history1.shift();draw()}if(data.alarm&&data.online)log('Node 1 vibration threshold exceeded');}
+  else if(topic===TOPIC.n2){latest2=data;lastN2=Date.now();if(Number.isFinite(data.current_ma)){history2.push(data.current_ma);if(history2.length>60)history2.shift();draw()}if(lastRelay===null)lastRelay=!!data.relay_on;}
+  else if(topic===TOPIC.relay){lastRelay=!!data.on;log('Relay confirmed as commanded '+(lastRelay?'ON':'OFF'));}
+  refreshUI();
+}catch(e){log('Message parse error on '+topic+': '+e.message)}}
+function connect(){if(typeof mqtt==='undefined'){alert('MQTT.js did not load. Check internet/CDN or host the library locally.');return}if(client){client.end(true);client=null;}
+  const host=$('mqttHost').value.trim(),username=$('mqttUser').value.trim(),password=$('mqttPassword').value;
+  if(!host||!username||!password){alert('Enter broker host, MQTT username, and password.');return;}
+  if(!/^[a-z0-9.-]+$/i.test(host)){alert('Enter only the broker hostname, not a full URL.');return;}
+  const url='wss://'+host+':8084/mqtt';const clientId='andromeda-web-'+Math.random().toString(16).slice(2,10);
+  $('connectBtn').disabled=true;setChip('connectionLabel','CONNECTING','warn');log('Connecting to '+host+' securely...');
+  try{client=mqtt.connect(url,{username,password,clientId,keepalive:30,clean:true,connectTimeout:10000,reconnectPeriod:4000,protocolVersion:4});}
+  catch(e){$('connectBtn').disabled=false;setChip('connectionLabel','FAILED','bad');log('Connect error: '+e.message);return;}
+  client.on('connect',()=>{connected=true;gatewayOnline=false;badge('cloudDot',true,'MQTT Online','MQTT Offline');set('mqttLink','CONNECTED');setChip('connectionLabel','CONNECTED','');$('connectBtn').disabled=true;$('disconnectBtn').disabled=false;log('MQTT connected, subscribing to project topics');
+    client.subscribe([TOPIC.n1,TOPIC.n2,TOPIC.relay,TOPIC.gateway],{qos:0},(err,granted)=>{if(err)log('Subscribe error: '+err.message);else if(granted){granted.forEach(g=>{if(g.qos===128)log('DENIED subscribe: '+g.topic+' — check EMQX Client ID versus username authorization');});}refreshUI();});});
+  client.on('message',onMessage);
+  client.on('reconnect',()=>{markOffline();setChip('connectionLabel','RECONNECTING','warn')});
+  client.on('offline',()=>{markOffline()});client.on('close',()=>{markOffline()});
+  client.on('error',e=>{log('MQTT error: '+e.message);if(!connected){$('connectBtn').disabled=false;setChip('connectionLabel','ERROR','bad')}});
+}
+function disconnect(){if(client){client.end(true);client=null;}markOffline();$('connectBtn').disabled=false;$('disconnectBtn').disabled=true;log('Disconnected manually')}
+function relayCommand(on){if(!client||!connected||!gatewayOnline||!latest2||!fresh(lastN2)){alert('Gateway ESP32 is offline or has no fresh telemetry. Open Node 2 Serial Monitor at 115200 baud.');return;}
+  if(on&&!window.confirm('Turn ON the DC motor relay? Confirm bench load and power supply are safe.'))return;
+  const payload=(on?'ON':'OFF')+'|'+Math.floor(Date.now()/1000);
+  client.publish(TOPIC.command,payload,{qos:0,retain:false},err=>{if(err)log('Relay command failed: '+err.message);else log('Sent '+(on?'ON':'OFF')+' request; waiting for relay state feedback')});}
+function exportCSV(){const rows=[['timestamp_utc','event'],...logRows];const csv=rows.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');const link=document.createElement('a');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));link.href=url;link.download='andromeda_events.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+async function analyze(){if(!GEMINI_PROXY_ENDPOINT||!latest1||!latest2)return;
+  $('aiBtn').disabled=true;set('aiResult','Requesting analysis from configured backend...');try{
+    const r=await fetch(GEMINI_PROXY_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({node1:latest1,node2:latest2})});
+    if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();set('aiResult',data.answer||data.analysis||'Backend did not return an answer/analysis field.');
+  }catch(e){set('aiResult','Analysis failed: '+e.message)}finally{$('aiBtn').disabled=false;}}
+$('connectBtn').addEventListener('click',connect);$('disconnectBtn').addEventListener('click',disconnect);$('onBtn').addEventListener('click',()=>relayCommand(true));$('offBtn').addEventListener('click',()=>relayCommand(false));$('exportBtn').addEventListener('click',exportCSV);$('aiBtn').addEventListener('click',analyze);
+$('aiBtn').disabled=!GEMINI_PROXY_ENDPOINT;
+setInterval(refreshUI,1000);window.addEventListener('resize',draw);draw();
+// Immediately start MQTT when dashboard opens. MQTT.js handles reconnection
+// when the network/broker connection goes down. Manual disconnect stops it.
+connect();
+</script>
+</body></html>
